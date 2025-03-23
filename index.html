@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #f61414, #ebdb9c);
+    padding: 20px;
+}
+
+/* Container Styles */
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Text Styles */
+h1 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-bottom: 1rem;
+}
+
+/* Button Styles */
+.buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: clamp(8px, 2vw, 15px) clamp(20px, 4vw, 30px);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.yes-btn {
+    background-color: #e92966;
+    color: white;
+}
+
+.no-btn {
+    background-color: #ff4444;
+    color: white;
+}
+
+.yes-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Card Container Styles */
+.card-container {
+    perspective: 1000px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Card Styles */
+.card {
+    width: 100%;
+    height: clamp(400px, 80vh, 600px);
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-front {
+    left: 0;
+    overflow: hidden;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-back {
+    right: 0;
+    padding: clamp(1rem, 3vw, 2rem);
+    overflow-y: auto;
+}
+
+.card-back h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    text-align: center;
+}
+
+.card-back p {
+    color: #666;
+    line-height: 1.6;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    text-align: left;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.back-btn {
+    background-color: #333;
+    color: white;
+    white-space: nowrap;
+    
+}
+
+.home-btn {
+    background-color: #666;
+}
+
+/* Birthday Text Animation */
+.birthday-text {
+    background: linear-gradient(45deg, #ff0000, #dcc258);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: bounce 1s infinite;
+}
+/* Card Front and Image Styles */
+.card-front {
+  left: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from cover to contain */
+  padding: 20px; /* Added padding around the image */
+  background: #fff; /* Added white background */
+}
+
+/* Medium Screens */
+@media screen and (max-width: 768px) {
+  .card-front {
+      height: 50%;
+  }
+
+  .card-front img {
+      padding: 15px; /* Slightly reduced padding for smaller screens */
+  }
+}
+
+/* Small Screens */
+@media screen and (max-width: 480px) {
+  .card-front img {
+      padding: 10px; /* Further reduced padding for mobile */
+  }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Custom Scrollbar */
+.card-back::-webkit-scrollbar {
+    width: clamp(4px, 1vw, 8px);
+}
+
+.card-back::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.card-back::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+/* Medium Screens */
+@media screen and (max-width: 768px) {
+    .card-inner {
+        flex-direction: column;
+    }
+
+    .card-front, .card-back {
+        width: 100%;
+        height: 50%;
+    }
+
+    .card-back {
+        top: 50%;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Small Screens */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    .card {
+        height: clamp(500px, 90vh, 700px);
+    }
+
+    .navigation-buttons {
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .back-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Handle very small screens */
+@media screen and (max-width: 320px) {
+    .container {
+        padding: 1rem;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+}
+
+/* Handle landscape mode */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .card {
+        height: 90vh;
+    }
+
+    .card-inner {
+        flex-direction: row;
+    }
+
+    .card-front, .card-back {
+        width: 50%;
+        height: 100%;
+    }
+
+    .card-back {
+        top: 0;
+    }
+}
+</style>
+<body>
+    <div class="container" id="firstPage">
+        <h1>Hey, You Look Beautiful! ✨</h1>
+        <p>Do you love me 👉🏻👈🏻hehe? Try clicking no.</p>
+        <div class="buttons">
+            <button onclick="showSecondPage()" class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+    </div>
+
+    <div class="container" id="secondPage" style="display: none;">
+        <h1 class="birthday-text">Happy Birthday! 🎂</h1>
+        <p>Would you like to see your surprise?</p>
+        <div class="buttons">
+            <button onclick="showCard()" class="yes-btn">Yes</button>
+        </div>
+    </div>
+
+    <div class="card-container" id="cardPage" style="display: none;">
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="bb.jpeg" alt="Birthday Image">
+                </div>
+                <div class="card-back">
+                    <h2>Happy Birthday Princess  😚😚😚😚💗💗💗</h2>
+                    <p>Happy birthday to the most beautiful girl to the love of my life. Babee have a great day I love youuuu sooo sooo much, I won't be there for your birthday this time and maybe the next 3 years too but trust me I will cover up all of these once we start living together Ik you wanted me to kiss youu today and wish you the best Happy birthday 😚😚😚😚mwahhhh I just kissed you through the text babee. 
+                        You know baby you are soo special to me you make me the happiest I'm so lucky I have you. I wanna marry youu darling and give you all the happiness you deserve. I just want to be the best one for youu since you deserve the best. Staying this far you can always talk to me whenever you feel like Iam not giving you the attention you deserve but if I ever missed something maybe I was busy you know how busy I am and you can still tell me babyy whatever comes to your mind don't you ever think that I'll mind or something I want to be the best and I want you to correct me in the places I make mistake.
+                        I'm so proud of youu babyy always smile and I will always be there for youu anytime. Since it is ur birthday I will give your first gift 😚 the gift is that I'll be coming home on 19th. Hehe 🤭 if you liked your first gift give me a kiss if not i still want a kiss 🤭🤭. I LOVE YOU Babyy and I'll always do. Writing this puts me into tears cuz another birthday and I'm not there for you irl but I hope when you are reading this you see me through the text saying each and every line.
+                        I love youu wifeeeiii 💗.</p>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-buttons">
+            <button class="back-btn" onclick="goToSecondPage()">← Back to Birthday</button>
+            <button class="back-btn home-btn" onclick="goToFirstPage()">← Back to Start</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
+</html> 
